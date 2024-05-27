@@ -1,0 +1,25 @@
+{
+  "name": "screenapi",
+  "module": "cwelbet.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "dev": "bun run src/cwelbet.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "@types/node": "^20.12.12",
+    "@types/ws": "^8.5.10",
+    "discord.js": "^14.15.2",
+    "dotenv": "^16.4.5",
+    "prisma": "^5.14.0",
+    "puppeteer": "^22.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}

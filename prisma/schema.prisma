@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id                Int      @id @default(autoincrement())
+  discordId         String   @unique
+  username          String?
+  balance           Float    @default(1000)
+  balanceLastClaimed DateTime @default(now())
+  bets              Bet[]
+}
+
+model Match {
+  team1         String
+  team2         String
+  teamscore1    String
+  teamscore2    String
+  time          String
+  oddsTeam1     String?
+  oddsDraw      String?
+  oddsTeam2     String?
+  ended         Boolean  @default(false)
+  uniqueId      String   @unique
+  bets          Bet[]
+}
+
+model Bet {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matchId         String
+  match           Match    @relation(fields: [matchId], references: [uniqueId], onDelete: Cascade)
+  amount          Float
+  odds            Float
+  status          String   @default("pending")
+  placedAt        DateTime @default(now())
+  betOn           String  
+
+  @@unique([userId, matchId])
+}
